@@ -1,0 +1,51 @@
+name: Sync and Release Clang Toolchains
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Maximize build space
+      run: |
+        sudo rm -rf /usr/share/dotnet
+        sudo rm -rf /usr/local/lib/android
+        sudo rm -rf /opt/ghc
+
+    - name: Download Clang r547379
+      run: |
+        mkdir -p clang-r547379
+        curl -L --connect-timeout 15 --retry 5 https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/refs/heads/main/clang-r547379.tar.gz -o clang-r547379.tar.gz
+        
+    - name: Download Clang r563880c (Android 16 QPR2)
+      run: |
+        curl -L --connect-timeout 15 --retry 5 "https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/heads/android16-qpr2-release/clang-r563880c.tar.gz" -o clang-r563880c.tar.gz
+
+    - name: Verify Downloads
+      run: |
+        ls -lh *.tar.gz
+
+    - name: Create GitHub Release
+      uses: softprops/action-gh-release@v2
+      with:
+        tag_name: clang-cihuyy-${{ github.run_number }}
+        name: "Clang Toolchains (r547379 & r563880c)"
+        body: |
+          ## Automated Clang Toolchains Release
+          
+          ### Binaries Included:
+          * **Clang r547379** (Main/Base branch)
+          * **Clang r563880c** (Android 16 QPR2 Release)
+          
+        draft: false
+        prerelease: false
+        files: |
+          clang-r547379.tar.gz
+          clang-r563880c.tar.gz
