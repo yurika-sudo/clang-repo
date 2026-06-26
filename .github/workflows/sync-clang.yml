@@ -35,7 +35,7 @@ jobs:
     - name: Create GitHub Release
       uses: softprops/action-gh-release@v2
       with:
-        tag_name: clang-cihuyy-${{ github.run_number }}
+        tag_name: clang-${{ github.run_number }}
         name: "Clang Toolchains (r547379 & r563880c)"
         body: |
           ## Automated Clang Toolchains Release
