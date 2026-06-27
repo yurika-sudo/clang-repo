@@ -19,6 +19,12 @@ jobs:
         sudo rm -rf /usr/local/lib/android
         sudo rm -rf /opt/ghc
 
+    - name: Download Clang r522817 (Clang 18 / vili SM8350)
+      run: |
+        curl -L --connect-timeout 15 --retry 5 \
+          "https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/refs/heads/main/clang-r522817.tar.gz" \
+          -o clang-r522817.tar.gz
+        
     - name: Download Clang r547379
       run: |
         curl -L --connect-timeout 15 --retry 5 https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/refs/heads/main/clang-r547379.tar.gz -o clang-r547379.tar.gz
@@ -40,6 +46,7 @@ jobs:
           ## Automated Clang Toolchains Release
           
           ### Binaries Included:
+          * **Clang r522817** (Clang 18.0.1 / vili SM8350 NonGKI)    
           * **Clang r547379** (Main/Base branch)
           * **Clang r563880c** (Android 16 QPR2 Release)
           
