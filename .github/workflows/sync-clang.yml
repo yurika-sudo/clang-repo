@@ -25,11 +25,11 @@ jobs:
           "https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/refs/heads/main/clang-r522817.tar.gz" \
           -o clang-r522817.tar.gz
         
-    - name: Download Clang r547379
+    - name: Download Clang r547379 (Clang 20 / sapphire SM6225)
       run: |
         curl -L --connect-timeout 15 --retry 5 https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/refs/heads/main/clang-r547379.tar.gz -o clang-r547379.tar.gz
         
-    - name: Download Clang r563880c (Android 16 QPR2)
+    - name: Download Clang r563880c (Clang 21 / rtwo SM8550)
       run: |
         curl -L --connect-timeout 15 --retry 5 "https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/heads/android16-qpr2-release/clang-r563880c.tar.gz" -o clang-r563880c.tar.gz
 
@@ -46,9 +46,9 @@ jobs:
           ## Automated Clang Toolchains Release
           
           ### Binaries Included:
-          * **Clang r522817** (Clang 18.0.1 / vili SM8350 NonGKI)    
-          * **Clang r547379** (Main/Base branch)
-          * **Clang r563880c** (Android 16 QPR2 Release)
+          * **Clang r522817** (Clang 18 / vili SM8350 NonGKI)    
+          * **Clang r547379** (Clang 20 / sapphire SM6225)
+          * **Clang r563880c** (Clang 21 / rtwo SM8550)
           
         draft: false
         prerelease: false
