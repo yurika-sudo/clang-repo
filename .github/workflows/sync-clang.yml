@@ -19,39 +19,45 @@ jobs:
         sudo rm -rf /usr/local/lib/android
         sudo rm -rf /opt/ghc
 
-    - name: Download Clang r522817 (Clang 18 / vili SM8350)
+    - name: Download Clang Toolchains (parallel)
       run: |
+        # r522817 — Clang 18 / vili SM8350 NonGKI
         curl -L --connect-timeout 15 --retry 5 \
           "https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/refs/heads/main/clang-r522817.tar.gz" \
-          -o clang-r522817.tar.gz
-        
-    - name: Download Clang r547379 (Clang 20 / sapphire SM6225)
-      run: |
-        curl -L --connect-timeout 15 --retry 5 https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/refs/heads/main/clang-r547379.tar.gz -o clang-r547379.tar.gz
-        
-    - name: Download Clang r563880c (Clang 21 / rtwo SM8550)
-      run: |
-        curl -L --connect-timeout 15 --retry 5 "https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/heads/android16-qpr2-release/clang-r563880c.tar.gz" -o clang-r563880c.tar.gz
+          -o clang-r522817.tar.gz &
+
+        # r547379 — Clang 20 / sapphire SM6225
+        curl -L --connect-timeout 15 --retry 5 \
+          "https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/refs/heads/main/clang-r547379.tar.gz" \
+          -o clang-r547379.tar.gz &
+
+        # r563880c — Clang 21 / rtwo SM8550
+        curl -L --connect-timeout 15 --retry 5 \
+          "https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/heads/android16-qpr2-release/clang-r563880c.tar.gz" \
+          -o clang-r563880c.tar.gz &
+
+        wait
+        echo "[OK] All downloads complete"
 
     - name: Verify Downloads
-      run: |
-        ls -lh *.tar.gz
+      run: ls -lh *.tar.gz
 
     - name: Create GitHub Release
       uses: softprops/action-gh-release@v2
       with:
         tag_name: clang-${{ github.run_number }}
-        name: "Clang Toolchains (r547379 & r563880c)"
+        name: "Clang Toolchains (r522817, r547379 & r563880c)"
         body: |
           ## Automated Clang Toolchains Release
-          
+
           ### Binaries Included:
-          * **Clang r522817** (Clang 18 / vili SM8350 NonGKI)    
+          * **Clang r522817** (Clang 18 / vili SM8350 NonGKI)
           * **Clang r547379** (Clang 20 / sapphire SM6225)
           * **Clang r563880c** (Clang 21 / rtwo SM8550)
-          
+
         draft: false
         prerelease: false
         files: |
+          clang-r522817.tar.gz
           clang-r547379.tar.gz
           clang-r563880c.tar.gz
