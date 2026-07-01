@@ -38,8 +38,9 @@ jobs:
 
         # Google Clang r584948b (Clang 22 Trunk)
         curl -L --connect-timeout 15 --retry 5 \
-          "https://googlesource.com" \
+          "https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/refs/heads/main/clang-r584948b.tar.gz" \
           -o clang-r584948b.tar.gz &
+
 
         # ZyC Clang 23.0.0git (Upstream LLVM)
         curl -L --connect-timeout 15 --retry 5 \
