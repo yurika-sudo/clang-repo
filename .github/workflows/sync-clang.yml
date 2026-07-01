@@ -21,20 +21,30 @@ jobs:
 
     - name: Download Clang Toolchains (parallel)
       run: |
-        # r522817 — Clang 18 / vili SM8350 NonGKI
+        # Google Clang r522817 (Clang 18)
         curl -L --connect-timeout 15 --retry 5 \
           "https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/refs/heads/main/clang-r522817.tar.gz" \
           -o clang-r522817.tar.gz &
 
-        # r547379 — Clang 20 / sapphire SM6225
+        # Google Clang r547379 (Clang 20)
         curl -L --connect-timeout 15 --retry 5 \
           "https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/refs/heads/main/clang-r547379.tar.gz" \
           -o clang-r547379.tar.gz &
 
-        # r563880c — Clang 21 / rtwo SM8550
+        # Google Clang r563880c (Clang 21)
         curl -L --connect-timeout 15 --retry 5 \
           "https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/heads/android16-qpr2-release/clang-r563880c.tar.gz" \
           -o clang-r563880c.tar.gz &
+
+        # Google Clang r584948b (Clang 22 Trunk)
+        curl -L --connect-timeout 15 --retry 5 \
+          "https://googlesource.com" \
+          -o clang-r584948b.tar.gz &
+
+        # ZyC Clang 23.0.0git (Upstream LLVM)
+        curl -L --connect-timeout 15 --retry 5 \
+          "https://github.com/ZyCromerZ/Clang/releases/download/23.0.0git-20260130-release/Clang-23.0.0git-20260130.tar.gz" \
+          -o ZyC-Clang-23.0.0git.tar.gz &
 
         wait
         echo "[OK] All downloads complete"
@@ -46,14 +56,16 @@ jobs:
       uses: softprops/action-gh-release@v2
       with:
         tag_name: clang-${{ github.run_number }}
-        name: "Clang Toolchains (r522817, r547379 & r563880c)"
+        name: "Clang Toolchains Collection"
         body: |
           ## Automated Clang Toolchains Release
 
-          ### Binaries Included:
-          * **Clang r522817** (Clang 18 / vili SM8350 NonGKI)
-          * **Clang r547379** (Clang 20 / sapphire SM6225)
-          * **Clang r563880c** (Clang 21 / rtwo SM8550)
+          ### Binaries Included (Universal Architecture):
+          * **Google Clang r522817** (LLVM 18 Base)
+          * **Google Clang r547379** (LLVM 20 Base)
+          * **Google Clang r563880c** (LLVM 21 Base)
+          * **Google Clang r584948b** (LLVM 22 Bleeding-Edge)
+          * **ZyC Clang 23.0.0git** (Upstream LLVM + Community Optimizations)
 
         draft: false
         prerelease: false
@@ -61,3 +73,5 @@ jobs:
           clang-r522817.tar.gz
           clang-r547379.tar.gz
           clang-r563880c.tar.gz
+          clang-r584948b.tar.gz
+          ZyC-Clang-23.0.0git.tar.gz
