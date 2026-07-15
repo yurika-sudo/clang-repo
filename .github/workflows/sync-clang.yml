@@ -21,30 +21,39 @@ jobs:
 
     - name: Download Clang Toolchains (parallel)
       run: |
+        # Google Clang r450784e (Clang 14.0.7 - GKI 5.15 Stable Backup)
+        curl -L --connect-timeout 15 --retry 5 \
+          "https://googlesource.com" \
+          -o clang-r450784e.tar.gz &
+
         # Google Clang r522817 (Clang 18)
         curl -L --connect-timeout 15 --retry 5 \
-          "https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/refs/heads/main/clang-r522817.tar.gz" \
+          "https://googlesource.com" \
           -o clang-r522817.tar.gz &
 
         # Google Clang r547379 (Clang 20)
         curl -L --connect-timeout 15 --retry 5 \
-          "https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/refs/heads/main/clang-r547379.tar.gz" \
+          "https://googlesource.com" \
           -o clang-r547379.tar.gz &
 
         # Google Clang r563880c (Clang 21)
         curl -L --connect-timeout 15 --retry 5 \
-          "https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/heads/android16-qpr2-release/clang-r563880c.tar.gz" \
+          "https://googlesource.com" \
           -o clang-r563880c.tar.gz &
 
         # Google Clang r584948b (Clang 22 Trunk)
         curl -L --connect-timeout 15 --retry 5 \
-          "https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/refs/heads/main-kernel/clang-r584948b.tar.gz" \
+          "https://googlesource.com" \
           -o clang-r584948b.tar.gz &
 
+        # ZyC Clang 15.0.7 (Stable Android 2026 Backport - Fix USB Tethering)
+        curl -L --connect-timeout 15 --retry 5 \
+          "https://github.com" \
+          -o ZyC-Clang-15.0.7.tar.gz &
 
         # ZyC Clang 23.0.0git (Upstream LLVM)
         curl -L --connect-timeout 15 --retry 5 \
-          "https://github.com/ZyCromerZ/Clang/releases/download/23.0.0git-20260130-release/Clang-23.0.0git-20260130.tar.gz" \
+          "https://github.com" \
           -o ZyC-Clang-23.0.0git.tar.gz &
 
         wait
@@ -62,17 +71,21 @@ jobs:
           ## Automated Clang Toolchains Release
 
           ### Binaries Included (Universal Architecture):
+          * **Google Clang r450784e** (LLVM 14 Base - GKI 5.15 Compatibility)
           * **Google Clang r522817** (LLVM 18 Base)
           * **Google Clang r547379** (LLVM 20 Base)
           * **Google Clang r563880c** (LLVM 21 Base)
           * **Google Clang r584948b** (LLVM 22 Bleeding-Edge)
+          * **ZyC Clang 15.0.7** (Stable Android 2026 Backport - Fix USB Tethering)
           * **ZyC Clang 23.0.0git** (Upstream LLVM + Community Optimizations)
 
         draft: false
         prerelease: false
         files: |
+          clang-r450784e.tar.gz
           clang-r522817.tar.gz
           clang-r547379.tar.gz
           clang-r563880c.tar.gz
           clang-r584948b.tar.gz
+          ZyC-Clang-15.0.7.tar.gz
           ZyC-Clang-23.0.0git.tar.gz
