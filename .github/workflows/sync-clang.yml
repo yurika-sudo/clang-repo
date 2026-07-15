@@ -23,37 +23,38 @@ jobs:
       run: |
         # Google Clang r450784e (Clang 14.0.7 - GKI 5.15 Stable Backup)
         curl -L --connect-timeout 15 --retry 5 \
-          "https://googlesource.com" \
+          "https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/refs/heads/main/clang-r450784e.tar.gz" \
           -o clang-r450784e.tar.gz &
 
         # Google Clang r522817 (Clang 18)
         curl -L --connect-timeout 15 --retry 5 \
-          "https://googlesource.com" \
+          "https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/refs/heads/main/clang-r522817.tar.gz" \
           -o clang-r522817.tar.gz &
 
         # Google Clang r547379 (Clang 20)
         curl -L --connect-timeout 15 --retry 5 \
-          "https://googlesource.com" \
+          "https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/refs/heads/main/clang-r547379.tar.gz" \
           -o clang-r547379.tar.gz &
 
         # Google Clang r563880c (Clang 21)
         curl -L --connect-timeout 15 --retry 5 \
-          "https://googlesource.com" \
+          "https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/heads/android16-qpr2-release/clang-r563880c.tar.gz" \
           -o clang-r563880c.tar.gz &
 
         # Google Clang r584948b (Clang 22 Trunk)
         curl -L --connect-timeout 15 --retry 5 \
-          "https://googlesource.com" \
+          "https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/refs/heads/main-kernel/clang-r584948b.tar.gz" \
           -o clang-r584948b.tar.gz &
 
         # ZyC Clang 15.0.7 (Stable Android 2026 Backport - Fix USB Tethering)
+        # Note: Sesuaikan link rilis GitHub di bawah jika ZyCromerZ menggunakan format penamaan tag/tanggal yang berbeda untuk versi ini
         curl -L --connect-timeout 15 --retry 5 \
-          "https://github.com" \
+          "https://github.com/ZyCromerZ/Clang/releases/download/15.0.7-release/Clang-15.0.7.tar.gz" \
           -o ZyC-Clang-15.0.7.tar.gz &
 
         # ZyC Clang 23.0.0git (Upstream LLVM)
         curl -L --connect-timeout 15 --retry 5 \
-          "https://github.com" \
+          "https://github.com/ZyCromerZ/Clang/releases/download/23.0.0git-20260130-release/Clang-23.0.0git-20260130.tar.gz" \
           -o ZyC-Clang-23.0.0git.tar.gz &
 
         wait
