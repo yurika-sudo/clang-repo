@@ -21,7 +21,7 @@ jobs:
 
     - name: Download Clang Toolchains (parallel)
       run: |
-        # Google Clang r450784e (Clang 14.0.7 - GKI 5.15 Stable Backup)
+        # Google Clang r450784e (Clang 14)
         curl -L --connect-timeout 15 --retry 5 \
           "https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/master-kernel-build-2022/clang-r450784e.tar.gz" \
           -o clang-r450784e.tar.gz &
@@ -41,15 +41,15 @@ jobs:
           "https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/heads/android16-qpr2-release/clang-r563880c.tar.gz" \
           -o clang-r563880c.tar.gz &
 
-        # Google Clang r584948b (Clang 22 Trunk)
+        # Google Clang r584948b (Clang 22)
         curl -L --connect-timeout 15 --retry 5 \
           "https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/refs/heads/main-kernel/clang-r584948b.tar.gz" \
           -o clang-r584948b.tar.gz &
 
-        # ZyC Clang 15.0.7 (Stable Android 2026 Backport - Fix USB Tethering)
+        # ZyC Clang 14.0.6 (Clang 14)
         curl -L --connect-timeout 15 --retry 5 \
-          "https://github.com/ZyCromerZ/Clang/releases/download/15.0.7-20260709-release/Clang-15.0.7-20260709.tar.gz" \
-          -o ZyC-Clang-15.0.7.tar.gz &
+          "https://github.com/ZyCromerZ/Clang/releases/download/14.0.6-20260619-release/Clang-14.0.6-20260619.tar.gz" \
+          -o ZyC-Clang-14.0.6.tar.gz &
 
         # ZyC Clang 23.0.0git (Upstream LLVM)
         curl -L --connect-timeout 15 --retry 5 \
@@ -71,13 +71,13 @@ jobs:
           ## Automated Clang Toolchains Release
 
           ### Binaries Included (Universal Architecture):
-          * **Google Clang r450784e** (LLVM 14 Base - GKI 5.15 Compatibility)
+          * **Google Clang r450784e** (LLVM 14 Base)
           * **Google Clang r522817** (LLVM 18 Base)
           * **Google Clang r547379** (LLVM 20 Base)
           * **Google Clang r563880c** (LLVM 21 Base)
-          * **Google Clang r584948b** (LLVM 22 Bleeding-Edge)
-          * **ZyC Clang 15.0.7** (Stable Android 2026 Backport - Fix USB Tethering)
-          * **ZyC Clang 23.0.0git** (Upstream LLVM + Community Optimizations)
+          * **Google Clang r584948b** (LLVM 22)
+          * **ZyC Clang 14.0.6** (LLVM 14 Base)
+          * **ZyC Clang 23.0.0git** (LLVM 23 Base)
 
         draft: false
         prerelease: false
@@ -87,5 +87,5 @@ jobs:
           clang-r547379.tar.gz
           clang-r563880c.tar.gz
           clang-r584948b.tar.gz
-          ZyC-Clang-15.0.7.tar.gz
+          ZyC-Clang-14.0.6.tar.gz
           ZyC-Clang-23.0.0git.tar.gz
