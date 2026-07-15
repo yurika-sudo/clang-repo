@@ -47,9 +47,8 @@ jobs:
           -o clang-r584948b.tar.gz &
 
         # ZyC Clang 15.0.7 (Stable Android 2026 Backport - Fix USB Tethering)
-        # Note: Sesuaikan link rilis GitHub di bawah jika ZyCromerZ menggunakan format penamaan tag/tanggal yang berbeda untuk versi ini
         curl -L --connect-timeout 15 --retry 5 \
-          "https://github.com/ZyCromerZ/Clang/releases/download/15.0.7-release/Clang-15.0.7.tar.gz" \
+          "https://github.com/ZyCromerZ/Clang/releases/download/15.0.7-20260709-release/Clang-15.0.7-20260709.tar.gz" \
           -o ZyC-Clang-15.0.7.tar.gz &
 
         # ZyC Clang 23.0.0git (Upstream LLVM)
